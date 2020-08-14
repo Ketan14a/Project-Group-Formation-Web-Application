@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+	<head>
+		<title>CSCI5308 - Group Formation Tool</title>
+	</head>
+	<body>
+	  	<div sec:authorize="isAuthenticated()">
+	       <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+	      
+	       <form th:action="@{/logout}" method="post">
+	           <input type="submit" value="Sign Out"/>
+	       </form>
+		</div>
+		<h1 th:text="'Course: ' + ${course.title}">Course: Title Not Found</h1>
+		 <div th:if="${student}">
+	        <div th:if="${surveyAvailable}">
+	       	  <h1><a th:href="@{/survey/surveyInstructions(id=${course.id})}">A survey is available for this course!</a></h1>
+	        </div>
+	     </div>
+		<div th:if="${instructor} or ${ta}">
+			<br/>
+			<a th:href="@{/course/instructoradmin(id=${course.id})}">Course Administration</a>
+			<a th:href="@{/survey/createSurvey(course_id=${course.id},instructorID=${instructorID})}">Create Course Survey</a>
+			<a th:href="@{/survey/updateSurvey(course_id=${course.id},instructorID=${instructorID})}">Update Course Survey</a>
+			<a th:href="@{/survey/publishSurvey(course_id=${course.id})}">publish Course Survey</a>
+			<a th:href="@{/course/GroupFormationPolicies(id=${course.id})}">Set Group formation Policies!</a>
+
+		</div>
+		
+		
+<br><br>
+<center><img src="/styles/agile.jpg"></center>
+	</body>
+</html>

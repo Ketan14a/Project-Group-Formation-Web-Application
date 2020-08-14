@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+    <title>Questions List</title>
+    <link th:href="@{/static/styles/cssandjs/normalize.css}" rel="stylesheet" />
+    <link th:href="@{/static/styles/cssandjs/main.css}" rel="stylesheet" />
+</head>
+<body class="bodyGridContainer">
+
+    <div sec:authorize="isAuthenticated()">
+        <h4 th:inline="text">BannerID: [[${#httpServletRequest.remoteUser}]]</h4>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <header class="bodyGridRow headerGridContainer"><h1>Questions List</h1></header>
+    <div>
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th><a th:href="@{/question/listQuestions?instructorID={id}&orderBy=title&orderType={type}(id=${instructorID},type=${orderType})}">Title</a></th>
+                <th>Question</th>
+                <th><a th:href="@{/question/listQuestions?instructorID={id}&orderBy=date&orderType={type}(id=${instructorID},type=${orderType})}">Date</a></th>
+            </tr>
+            <tr th:each="question, iterStat : ${questions}">
+                <td><p th:text="${iterStat.index+1}"></p></td>
+                <td><p th:text="${question.title}"></p></td>
+                <td><p th:text="${question.question}"></p></td>
+                <td><p th:text="${question.creationDate}"></p></td>
+            </tr>
+        </table>
+        <p class="my-5">
+            <a href="QuestionManagerMainPage" class="btn btn-primary">
+                <i class="fas fa-user-plus ml-2"> Back </i></a>
+        </p>
+    </div>
+
+</body>
+</html>

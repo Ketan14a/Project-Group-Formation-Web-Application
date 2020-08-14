@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+<title>Survey Instructions</title>
+</head>
+<body class="bodyGridContainer">
+
+<header class="bodyGridRow headerGridContainer">
+		<h1>CSCI5308 Group Formation Tool</h1>
+</header>
+	<center><h2>Welcome to the survey</h2></center>
+	<center><h3>Your responses will be recorded and used for forming your groups</h3></center>
+	<center><h3>You will be redirected to Survey page. Click the button given below</h3></center>
+	
+	<center>
+	<form th:action="@{/survey/studentSurvey(id=${survey.surveyID})}" method="post">
+	           <input type="submit" value="Begin Survey"/ style="width: 20%; border-radius: 15px; font-weight: bold;">
+	 </form>
+	</center>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+<title>Survey Instructions</title>
+</head>
+
+
+<body class="bodyGridContainer">
+<header class="bodyGridRow headerGridContainer">
+		<h1>Survey Creation</h1>
+</header>
+
+<center>
+<form th:action="@{/survey/createSurvey?(course_id=${courseID},instructorID=${instructorID})}" method="post"  th:object="${surveyForm}" >
+	<table>
+		<tr>
+			<th>S.No</th>
+			<th>Title</th>
+			<th>Question</th>
+			<th>Date</th>
+			<th>Click to Add</th>
+		</tr>
+		<tr th:each="question, iterStat : *{surveyQuestions}">
+			<input style="display:none" th:field="*{surveyQuestions[__${iterStat.index}__].id}" />
+			<td><p th:text="${question.title}" ></p></td>
+			<td><p th:text="${question.question}" ></p></td>
+			<td>
+				<select th:field="*{surveyQuestions[__${iterStat.index}__].selected}">
+				<option value="notSelected">Not selected</option>
+				<option value="selected">selected</option>
+		</select>
+			</td>
+		</tr>
+	</table>
+	
+	<br>
+	<input type="text" placeholder="Enter Survey Name" name="surveyname" id="isurveyname" th:field="*{surveyName}" required>
+	<input type="submit" id="submitsurvey">
+
+</form>
+</center>
+</body>
+
+</html>

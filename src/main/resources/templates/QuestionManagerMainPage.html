@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Question Management</title>
+	<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
+	<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+</head>
+<body class="bodyGridContainer">
+<header class="bodyGridRow headerGridContainer">
+		<h1>Question Management</h1></header>
+		
+		<div style="float: left">
+			
+			<a href="/question/QuestionManager"><button style="float: left; border-radius: 15px; font-weight: bold;"><h2>Create question</h2></button></a>
+			<button style="float: left; border-radius: 15px; font-weight: bold; margin-left: 55px"><h2><a th:href="@{/question/deleteQuestions?instructorID={id}&orderBy=date&orderType={type}(id=${instructorID},type=${orderType})}">Delete questions</a></h2></button>
+			<button style="float: left; border-radius: 15px; font-weight: bold; margin-left: 55px"><h2><a th:href="@{/question/listQuestions?instructorID={id}&orderBy=date&orderType={type}(id=${instructorID},type=${orderType})}">List questions</a></h2></button>
+		</div>
+		<div>
+			<p class="my-5">
+				<a href="/" class="btn btn-primary">
+					<i class="fas fa-user-plus ml-2"> Back </i></a>
+			</p>
+		</div>
+</body>
+</html>

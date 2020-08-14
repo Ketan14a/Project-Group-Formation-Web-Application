@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+<title>Student Survey</title>
+</head>
+<body class="bodyGridContainer">
+
+<header class="bodyGridRow headerGridContainer">
+		<h1>CSCI5308 Group Formation Tool</h1>
+</header>
+
+
+<form th:action="@{/survey/setRules(id=${survey.surveyID})}" method="post"  th:object="${policyForm}" >
+Group size: <input type="number" id="quantity" name="quantity" th:field="*{groupCount}">
+<div th:each="question, iterstat : *{surveyQuestions}">
+	<br><hr>
+	<input style="display:none" th:field="*{surveyQuestions[__${iterstat.index}__].id}" />
+	<input style="display:none" th:field="*{surveyQuestions[__${iterstat.index}__].question}" />
+	<strong th:text="${question.title}"></strong>
+	<p th:text="${question.question}"></p>
+	<p th:text="${question.type}"></p>
+	
+	<div th:if="${question.type == 'FREETEXT'}">
+		<select th:field="*{surveyQuestions[__${iterstat.index}__].policyType}">
+			<option value="NA">Don't consider</option>
+			<option value="similar">similar</option>
+			<option value="dissimilar">dissimilar</option>
+		</select>
+	</div>
+	
+	<div th:if="${question.type == 'MCCM'}">
+		<select th:field="*{surveyQuestions[__${iterstat.index}__].policyType}">
+			<option value="NA">Don't consider</option>
+			<option value="similar">similar</option>
+			<option value="dissimilar">dissimilar</option>
+		</select>
+	
+	</div>
+	
+	<div th:if="${question.type == 'MCCO'}">
+		<select th:field="*{surveyQuestions[__${iterstat.index}__].policyType}">
+			<option value="NA">Don't consider</option>
+			<option value="similar">similar</option>
+			<option value="dissimilar">dissimilar</option>
+		</select>
+	</div>
+	
+	<div th:if="${question.type == 'NUMERIC'}">
+		<select th:field="*{surveyQuestions[__${iterstat.index}__].policyType}">
+			<option value="NA">Don't consider</option>
+			<option value="similar">similar</option>
+			<option value="dissimilar">dissimilar</option>
+			<option value="greater">greater</option>
+			<option value="lesser">lesser</option>
+		</select>
+		Enter value if greater/lesser chosen: <input type="number" id="quantity" name="quantity" th:field="*{surveyQuestions[__${iterstat.index}__].value}">
+	</div>
+
+
+</div>
+
+
+
+<center><input type="submit" value="Create Group"></center>
+</form>
+
+
+
+
+
+
+</body>
+</html>

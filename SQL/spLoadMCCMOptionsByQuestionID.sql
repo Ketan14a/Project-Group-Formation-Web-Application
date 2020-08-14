@@ -1,0 +1,18 @@
+USE CSCI5308_24_DEVINT;
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS spLoadMCCMOptionsByQuestionID $$
+
+CREATE PROCEDURE spLoadMCCMOptionsByQuestionID (
+
+		IN QuestionID BIGINT
+)
+
+BEGIN
+	
+	SELECT value, choice from MCCM WHERE MCCM.id = QuestionID;
+
+END $$
+
+DELIMITER ;
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Creating Options</title>
+	<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
+	<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+</head>
+<script>
+	
+</script>
+
+
+<body class="bodyGridContainer">
+	<header class="bodyGridRow headerGridContainer">
+	<h1 style="text-decoration: underline;">Create your options here<a href="QuestionManagerMainPage"><button style="float: right; border-radius: 15px; font-weight: bold;">Cancel</button></a></h1>
+		<p th:text="${question.type}" />
+		
+		<center>
+		<form th:action="@{/question/CreationNext}" method="post" id="myForm" name="myForm"  th:object="${question}" >
+		<input type="text" style="display:none" th:field="*{title}" />
+		<input type="text" style="display:none" th:field="*{type}" />
+		<input type="text" style="display:none" th:field="*{question}" />
+		<input type="text" style="display:none" th:field="*{creationDate}" />
+		<input type="text" style="display:none" th:field="*{createdBy}" />
+		<table id="show_options" align="center" width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr th:each="option,optionarr:*{options}">
+				<td><label><strong>Display Text</strong></label></td>
+				<td><input type="text" style="width: 80%" placeholder="Display Text" th:field="*{options[__${option.key}__]}" required/></td>
+				<td><label><strong>Store as </strong> </label></td>
+				<td><input type="number" style="width: 80%" placeholder="Store as" th:value="${option.key}" required/></td>
+				</tr> 
+				
+
+		</table>
+			<td colspan="1"><input type="submit" name="action" value="AddOption" /></td>
+			<td colspan="1"><input type="submit"  name="action" value="DeleteOption"  /></td>
+			<input type="submit" name="action" value="CreateQuestion"/>
+
+
+		</form>
+
+	</center>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+	<head>
+		<title>CSCI5308 - Group Formation Tool</title>
+		<!-- Normalize.css by Nicolas Gallagher, used from https://necolas.github.io/normalize.css/ 
+			 Necessary to reset some default browser styles for consistent appearance across browsers. -->
+		<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
+
+		<!-- This file includes all default styles for this application. -->
+		<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+	</head>
+<meta charset="ISO-8859-1">
+<title>Database Down</title>
+</head>
+<body class="bodyGridContainer">
+<header class="bodyGridRow headerGridContainer">
+			<h1>CSCI5308 Group Formation Tool</h1>
+</header>
+		
+<center><h1 style="color:red">Sorry, we were unable to record your survey response due to technical faults in our database</h1></center>
+<br>
+
+<form class="userProfileGridCol4" th:action="@{/logout}" method="post">
+		<input type="submit" value="Logout"/>
+</form>
+</body>
+</html>

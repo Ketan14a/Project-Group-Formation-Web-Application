@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+	function change_in_ResponseType(dropDown) {
+		let input;
+		let button;
+		try{
+			document.getElementById("next").remove()
+		}catch (e) {
+
+		}
+		try {
+			document.getElementById("submit").remove()
+		}catch (e) {
+
+		}
+		try{
+			document.getElementById("linktonextpage").remove()
+		}catch (e) {
+			
+		}
+		if(dropDown.value == "MCCO" || dropDown.value =="MCCM"){
+			button = ""
+			button+= '<a id="linktonextpage" href="/question/CreationNext"><button type="submit" id="next" style="width: 20%; border-radius: 15px; font-weight: bold;">Next</button></a>'
+			$("#ChoiceDiv").append(button)
+		} else {
+			input = ""
+			input+= '<input type="submit" id="submit" name="submit" value="Submit the question" style="width: 20%; border-radius: 15px; font-weight: bold;">'
+			$("#ChoiceDiv").append(input)
+		}
+	}
+</script>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<title>Create Course</title>
+	<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
+	<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+
+</head>
+
+<body class="bodyGridContainer">
+	<header class="bodyGridRow headerGridContainer">
+		<h1>CSCI5308 Group Formation Tool</h1>
+	</header>
+	<h1 style="text-decoration: underline;">Let's build your question!<a href="/question/QuestionManagerMainPage"><button style="float: right; border-radius: 15px; font-weight: bold;">Cancel</button></a> </h1>
+	<p th:text="${message}" />
+<center>
+	<fieldset> <legend>Enter your question's details here</legend>
+	<form th:action="@{/question/QuestionManager}" method="post" th:object="${question}">
+
+		<label><strong>Title</strong></label> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+		<input type="text" name="title" id="title_id" placeholder="Enter your question's title here" style="width: 60%" required th:field="*{title}"> <br>
+		<label><strong>Question</strong></label> &nbsp &nbsp	
+		<input type="text" name="title" id="question_id" placeholder="Enter your new question here" style="width: 60%" required th:field="*{question}"> <br>
+		<label><strong>Type</strong></label> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+		<select name="responseType" id="responseType" onchange="change_in_ResponseType(this)" style="width: 61%; margin-top: 15px" th:field="*{type}">
+			<option value="NUMERIC">Numeric</option>
+   		    <option value="FREETEXT">Free Text</option>
+    		<option value="MCCO">Multiple Choice, Choose one</option>
+   		    <option value="MCCM">Multiple Choice, Choose many</option>
+		</select> <br>
+			<br><br>
+		<div align="center" id="ChoiceDiv">
+
+		</div>
+		<br>
+		<br>
+		
+		<input type="submit" id="submit" name="submit" value="Submit the question" style="width: 20%; border-radius: 15px; font-weight: bold;">
+		
+	</form>
+	</fieldset>
+</center>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/styles/cssandjs/normalize.css}" rel="stylesheet" />
+<link th:href="@{/styles/cssandjs/main.css}" rel="stylesheet" />
+<title>Student Survey</title>
+</head>
+<body class="bodyGridContainer">
+
+<header class="bodyGridRow headerGridContainer">
+		<h1>CSCI5308 Group Formation Tool</h1>
+</header>
+<table>
+<span th:each="question : ${questions}"style="display:none">
+<tr>
+<td th:text="${question.question}"></td>
+<td th:text="${question.policyType}"></td>
+<td th:text="${question.value}"></td>
+</tr>
+</span>
+</table>
+<table>
+<tr>
+<th>BAN ID</th>
+<th>First Name</th>
+<th>Second Name</th>
+<th>Responses</th>
+</tr>
+<span th:each="group : ${groups}" style="display:none">
+	<tr>
+	<td th:text="'Group: '+${group.key}"></td>
+	</tr>
+	<span th:each="member,iterstat:${group.value}" style="display:none">
+		<tr>
+		<td th:text="${member.key.bannerID}"></td>
+		<td th:text="${member.key.firstName}"></td>
+		<td th:text="${member.key.lastName}"></td>
+		<span th:each="response,iterstat:${member.value}" style="display:none">
+			<td th:text="${response}"><td> 
+		</span>
+		<tr>
+	</span>
+</span>
+<table>
+
+</form>
+
+
+
+
+
+
+</body>
+</html>
